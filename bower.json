@@ -1,9 +1,9 @@
 {
-  "name": "angular2-to-do",
-  "description": "",
+  "name": "taproom",
+  "description": "An application for managing the stock of a taproom",
   "main": "",
   "authors": [
-    "Courtney Phillips <courtney@epicodus.com>"
+    "Connor Larsen and Isabella Abatgis"
   ],
   "license": "ISC",
   "homepage": "",

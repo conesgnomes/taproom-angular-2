@@ -3,67 +3,48 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   template: `
-      <div class="container">
-       <h1>To Do List for {{month}}/{{day}}/{{year}}</h1>
-       <h3>{{currentFocus}}</h3>
-       <ul>
-        <li [class]="priorityColor(currentTask)" (click)="isDone(currentTask)" *ngFor="let currentTask of tasks">{{currentTask.description}} <button (click)="editTask(currentTask)">Edit!</button></li>
-      </ul>
-      <hr>
-      <div>
-       <h3>{{selectedTask.description}}</h3>
-       <p>Task Complete? {{selectedTask.done}}</p>
-      <h3>Edit Task</h3>
-      <label>Enter Task Description:</label>
-      <input [(ngModel)]="selectedTask.description">
-       <label>Enter Task Priority (1-3):</label>
-       <br>
-       <input type="radio" [(ngModel)]="selectedTask.priority" [value]="1">1 (Low Priority)<br>
-       <input type="radio" [(ngModel)]="selectedTask.priority" [value]="2">2 (Medium Priority)<br>
-       <input type="radio" [(ngModel)]="selectedTask.priority" [value]="3">3 (High Priority)
-      </div>
-    </div>
+  <div class="container">
+    <h1>Beer me</h1>
+
+      <table>
+        <tr *ngFor="let beer of beers">
+            <td>{{beer.name}}</td> <td><button (click)="removeBeer(beer)">Delete</button></td>
+        </tr>
+      </table>
+
+      <input #name type="text" />
+      <input #brand type="text" />
+      <input #price type="number" />
+      <input #abv type="number" />
+      <button (click)="addBeer(name.value,brand.value,price.value,abv.value)">Add Beer</button>
+  </div>
     `
 })
 
 export class AppComponent {
-  currentFocus: string = 'Angular Homework';
-  currentTime = new Date();
-  month: number = this.currentTime.getMonth() + 1;
-  day: number = this.currentTime.getDate();
-  year: number = this.currentTime.getFullYear();
-  tasks: Task[] = [
-    new Task('Finish weekend Angular homework for Epicodus course', 3),
-    new Task('Begin brainstorming possible JavaScript group projects', 2),
-    new Task('Add README file to last few Angular repos on GitHub', 2)  ];
-  selectedTask: Task = this.tasks[0];
 
-
-  editTask(clickedTask) {
-    this.selectedTask = clickedTask;
+  beers: Array<Beer>;
+  constructor(){
+    this.beers = [];
   }
 
-  isDone(clickedTask: Task) {
-    if(clickedTask.done === true) {
-      alert("This task is done!");
-    } else {
-      alert("This task is not done. Better get to work!");
-    }
+  addBeer(name, brand, price, abv){
+    let beer = new Beer(name, brand, price, abv);
+    this.beers.push(beer);
   }
 
-  priorityColor(currentTask){
-    if (currentTask.priority === 3){
-      return "bg-danger";
-    } else if (currentTask.priority === 2) {
-      return  "bg-warning";
-    } else {
-      return "bg-info";
-    }
+  removeBeer(beer){
+    let index = this.beers.indexOf(beer);
+    this.beers.splice(index,1);
   }
-
 }
 
-export class Task {
-  public done: boolean = false;
-  constructor(public description: string, public priority: number) { }
+export class Beer {
+
+  constructor(public name: string, public brand: string, public price: number, public abv: number) {
+    this.name = name,
+    this.brand = brand,
+    this.price = price,
+    this.abv = abv;
+  }
 }
