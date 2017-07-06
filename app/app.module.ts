@@ -5,6 +5,7 @@ import { FormsModule }  from '@angular/forms';
 import { BeerListComponent } from './beer-list.component';
 import { NewBeerComponent } from './new-beer.component';
 import { EditBeerComponent } from './edit-beer.component';
+import { EmptinessPipe } from './emptiness.pipe';
 
 @NgModule({
   imports: [ BrowserModule,
@@ -12,7 +13,8 @@ import { EditBeerComponent } from './edit-beer.component';
   declarations: [ AppComponent,
                   BeerListComponent,
                 NewBeerComponent,
-                EditBeerComponent],
+                EditBeerComponent,
+                EmptinessPipe],
   bootstrap:    [ AppComponent ]
 })
 
