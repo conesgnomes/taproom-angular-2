@@ -6,7 +6,7 @@
     "Connor Larsen and Isabella Abatgis"
   ],
   "license": "ISC",
-  "homepage": "",
+  "homepage": "https://github.com/conesgnomes/taproom-angular-2",
   "ignore": [
     "**/.*",
     "node_modules",
