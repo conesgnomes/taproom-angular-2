@@ -16,8 +16,8 @@ import { Beer } from './beer.model';
 export class NewBeerComponent {
   @Output() newBeerSender = new EventEmitter();
 
-  addBeer(name: string, brand: string, price: number, abv: number) {
-    var newBeerToAdd: Beer = new Beer(name, brand, price, abv);
+  addBeer(name: string, brand: string, price: number, abv: number, pints: number) {
+    var newBeerToAdd: Beer = new Beer(name, brand, price, abv, pints);
     this.newBeerSender.emit(newBeerToAdd);
   }
 }
