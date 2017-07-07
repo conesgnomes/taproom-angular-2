@@ -5,11 +5,21 @@ import { Beer } from './beer.model';
   selector: 'new-beer',
   template: `
     <h1>Add a new beer</h1>
-    <input #name type="text" />
-    <input #brand type="text" />
-    <input #price type="number" />
-    <input #abv type="number" />
-    <button (click)="addBeer(name.value,brand.value,price.value,abv.value); name.value=''; brand.value=''; price.value=''; abv.value='';">Add Beer</button>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Brand</th>
+        <th>Price</th>
+        <th>ABV</th>
+      </tr>
+      <tr>
+        <td><input #name type="text" /></td>
+        <td><input #brand type="text" /></td>
+        <td><input #price type="number" /></td>
+        <td><input #abv type="number" /></td>
+        <td><button (click)="addBeer(name.value,brand.value,price.value,abv.value); name.value=''; brand.value=''; price.value=''; abv.value='';">Add Beer</button></td>
+      </tr>
+    </table>
   `
 })
 

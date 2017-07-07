@@ -9,10 +9,17 @@ import { Beer } from './beer.model';
       <option value="emptyKegs">Empty Kegs</option>
     </select>
     <table>
+      <tr>
+        <th>Name</th>
+        <th>Brand</th>
+        <th>Price</th>
+        <th>ABV</th>
+        <th>Pints Remaining</th>
+      </tr>
       <tr *ngFor="let currentBeer of childBeerList | emptiness:filterByEmptiness">
         <td>{{currentBeer.name}}</td>
         <td>{{currentBeer.brand}}</td>
-        <td>{{currentBeer.price}}</td>
+        <td [ngClass="{underFive:true, overFive:false}"]>{{currentBeer.price}}</td>
         <td>{{currentBeer.abv}}</td>
         <td>{{currentBeer.pints}}</td>
         <button (click)="subtractPints(childBeerList.indexOf(currentBeer), 1)">Pint Sold</button>
@@ -26,7 +33,6 @@ import { Beer } from './beer.model';
 export class BeerListComponent {
   @Input() childBeerList: Beer[];
   @Output() clickSender = new EventEmitter();
-  @Output() soldPintsSender = new EventEmitter();
 
   filterByEmptiness: string = "allKegs";
 
@@ -38,11 +44,17 @@ export class BeerListComponent {
     this.clickSender.emit(beerToEdit);
   }
 
-  drinkButtonHasBeenClicked(beerToSell: Beer) {
-    this.soldPintsSender.emit(beerToSell);
-  }
-
   subtractPints(index, number){
     this.childBeerList[index].pints -= number;
   }
+
+  getCssClasses(flag:string) {
+    let cssClasses;
+    if(flag == 'nightMode') {
+      cssClasses = 'underFive';
+    } else {
+      cssClasses = 'overFive';
+    }
+  }
+
 }
